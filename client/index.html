@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chattr!</title>
+    <link href="https://fonts.googleapis.com/css?family=Dosis:500" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <script type="text/javascript" src="js/main.js"></script>
+  </head>
+  <body>
+    <div class="container dark">
+      <div class="content">
+        <h1>Welcome to Chattr!</h1>
+        <p>A minimal, distraction free chat application.</p>
+        <div class="loginC">
+          <div class="container">
+            <div class="channel-box">
+              chattr/
+              <input type="text" id="myChannel" placeholder="your-channel" onkeyup="checkC(event)" autofocus />
+            </div>
+            <input type="submit" value="Join" onclick="checkC({keyCode: 13})"/>
+          </div>
+        </div>
+        <p>Channels are created and joined by going to <b>chattr/your-channel</b>.</br>There are no channel lists, so a secret channel name can be used for private discussions.</p>
+        <b>No message history is retained in the server.</b>
+      </div>
+      <div id="notif" class="notif"></div>
+    </div>
+  </body>
+</html>

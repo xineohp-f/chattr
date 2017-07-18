@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chattr!</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Dosis:500" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container" id="app">
+      <header class="">
+        <div class="logo">
+          <a href="/">Chattr!</a>
+        </div>
+        <div class="u-info" id="u-info">
+          <b>{{nick}}</b>
+          <div class="icon">{{nick.substr(0,1)}}</div>
+        </div>
+      </header>
+      <div class="chat-box" id="chat-box">
+        <div class="container">
+          <div v-for="message in messages" v-bind:class="message.class">
+            <span v-if="message.nick" class="user">{{message.nick}}</span>
+            <div v-if="message.nick" class="icon">{{message.nick.substr(0,1)}}</div>
+            <div class="text-box"><div class="text">{{message.msg}}</div></div>
+          </div>
+          <div class="message-box">
+            <textarea placeholder="..." class="shadow" onkeypress="grow(this)" id="tarea" v-model="msg" v-on:keyup="grow" v-on:keyup.13="send"></textarea>
+            <input type="button" value="Send" class="shadow" v-on:click="send" />
+          </div>
+        </div>
+      </div>
+      <div class="sidebar" id="sidebar">
+        <div class="container">
+          <h2>/{{channel}}</h2>
+          <p>Users Online [ {{users.length}} ]</p>
+          <ul class="list">
+            <li v-for="user in users"><div class="icon">{{user.substr(0,1)}}</div>{{user}}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="login shadow" id="login">
+        <h3>Enter your username to start chatting...</h3>
+        <input type="text" placeholder="Username" id="myNick" onkeypress="check(event)" autofocus />
+        <input type="submit" value="Join" onclick="check({keyCode:13})"/>
+      </div>
+      <div class="notif" id="notif"></div>
+    </div>
+    <script type="text/javascript" src="js/socket.js"></script>
+    <script type="text/javascript" src="js/vue.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
+</html>
