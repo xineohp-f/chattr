@@ -17,6 +17,10 @@
           <b>{{nick}}</b>
           <div class="icon">{{nick.substr(0,1)}}</div>
         </div>
+        <div class="menu-bar" id="menu-bar">
+          <button id="bar" onclick="toggleSidebar()"><div class="bar"></div></button>
+          <button id="cross" onclick="toggleSidebar()"><div class="cross"></div></button>
+        </div>
       </header>
       <div class="chat-box" id="chat-box">
         <div class="container">
@@ -47,6 +51,7 @@
       </div>
       <div class="notif" id="notif"></div>
     </div>
+    <script src="//twemoji.maxcdn.com/2/twemoji.min.js?2.3.0"></script>
     <script type="text/javascript" src="js/socket.js"></script>
     <script type="text/javascript" src="js/vue.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
