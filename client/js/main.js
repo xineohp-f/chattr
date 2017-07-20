@@ -72,6 +72,7 @@ socket.on('ready', function(data) {
   document.getElementById('sidebar').style.display = "block";
   document.getElementById('u-info').className += " slide-left";
   document.getElementById('u-info').style.display = "block";
+  document.getElementById('menu-bar').className += " slide-left";
   document.getElementById('chat-box').className += " slide-Up";
   document.getElementById('chat-box').style.display = "block";
   document.getElementById('tarea').focus();
@@ -106,5 +107,20 @@ function checkC(event) {
       window.location.href="/"+document.getElementById('myChannel').value;
     }
     else notif("Channel name can contain only letters and digits.");
+  }
+}
+
+function toggleSidebar() {
+  let k = document.getElementById('menu-bar');
+  if (k.clic == undefined) k.clic = false;
+  if (!k.clic) {
+    k.clic = true;
+    k.className += " slideL";
+    document.getElementById('sidebar').className += ' showSide';
+  }
+  else {
+    k.clic = false;
+    document.getElementById('sidebar').className = 'sidebar';
+    k.className = "menu-bar";
   }
 }
