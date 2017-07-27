@@ -165,15 +165,19 @@ header .logo {
   position: absolute;
   bottom: 60px;
   text-align: center;
+  pointer-events: none;
 }
 
 .sidebar ul.colors > li {
   animation: hideDown 0.3s forwards;
   transform: translateY(100%);
+  pointer-events: none;
 }
 
 .sidebar ul.colors.show > li {
+  display: inline-block;
   animation: slideUp 0.2s forwards;
+  pointer-events: all;
 }
 
 .sidebar ul.colors.show > li:nth-of-type(n+5) {
@@ -692,6 +696,7 @@ input:hover {
   100% {
     opacity: 0;
     transform: translateY(100%);
+    display: none;
   }
 }
 
