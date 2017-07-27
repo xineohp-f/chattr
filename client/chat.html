@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Chattr!</title>
+    <title>Chattr</title>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dosis:500">
     <link rel="stylesheet" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Dosis:500" rel="stylesheet">
   </head>
   <body>
     <div class="container" id="app">
@@ -19,7 +20,6 @@
         </div>
         <div class="menu-bar" id="menu-bar">
           <button id="bar" onclick="toggleSidebar()"><div class="bar"></div></button>
-          <button id="cross" onclick="toggleSidebar()"><div class="cross"></div></button>
         </div>
       </header>
       <div class="chat-box" id="chat-box">
@@ -38,10 +38,21 @@
       <div class="sidebar" id="sidebar">
         <div class="container">
           <h2>/{{channel}}</h2>
-          <p>Users Online [ {{users.length}} ]</p>
+          <p><i class="fa fa-user" aria-hidden="true"></i> Users Online [ {{users.length}} ]</p>
           <ul class="list">
-            <li v-for="user in users"><div class="icon">{{user.substr(0,1)}}</div>{{user}}</li>
+            <li v-for="user in users"><div class="icon">{{user.nick.substr(0,1)}}</div>{{user.nick}}<i v-if="user.isTyping" class="fa fa-pencil" aria-hidden="true"></i></li>
           </ul>
+          <ul id="colors" class="colors">
+            <li class="material" id="0" onclick="changeTemp(this)"></li>
+            <li class="light blue" id="1" onclick="changeTemp(this)"></li>
+            <li class="dark blue" id="2" onclick="changeTemp(this)"></li>
+            <li class="light purple" id="3" onclick="changeTemp(this)"></li>
+            <li class="dark teal" id="4" onclick="changeTemp(this)"></li>
+            <li class="dark orange" id="5" onclick="changeTemp(this)"></li>
+            <li class="dark red" id="6" onclick="changeTemp(this)"></li>
+            <li class="dark black" id="7" onclick="changeTemp(this)"></li>
+          </ul>
+          <div class="settings" onclick="toggleSettings()"><i class="fa fa-gear"></i></div>
         </div>
       </div>
       <div class="login shadow" id="login">

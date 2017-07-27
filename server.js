@@ -41,7 +41,17 @@ io.on('connection', function(socket) {
 		if(data.msg.length > 60000) return;
 		data.msg = data.msg.replace(/\s+/, ' ');
 		if(data.msg != '' && data.msg != ' ')
-			send('newMsg', CLIENTS[socket.id], data.msg);
+			send('newMsg', CLIENTS[socket.id], {nick:CLIENTS[socket.id].nick, msg:data.msg});
+	});
+
+	socket.on('isTyping', function(data) {
+		CLIENTS[socket.id].isTyping = true;
+		send('typing', CLIENTS[socket.id], {users:getUsers(CLIENTS[socket.id].channel)});
+	});
+
+	socket.on('isNotTyping', function(data) {
+			CLIENTS[socket.id].isTyping = false;
+			send('typing', CLIENTS[socket.id], {users:getUsers(CLIENTS[socket.id].channel)});
 	});
 
   socket.on('disconnect', function() {
@@ -52,11 +62,12 @@ io.on('connection', function(socket) {
   });
 });
 
+
 function send(type, clt, data) {
 	for (key in CLIENTS) {
     if (CLIENTS[key] && CLIENTS[key] != null) {
       if (CLIENTS[key].channel == clt.channel)
-				CLIENTS[key].socket.emit(type, {nick:clt.nick, msg:data});
+				CLIENTS[key].socket.emit(type, data);
     }
   }
 }
@@ -75,7 +86,7 @@ function getUsers(chan) {
   for (key in CLIENTS) {
     if (CLIENTS[key] && CLIENTS[key] != null) {
       if (CLIENTS[key].channel == chan)
-        us.push(CLIENTS[key].nick);
+        us.push({nick:CLIENTS[key].nick, isTyping:CLIENTS[key].isTyping});
     }
   }
   return us;
@@ -93,6 +104,7 @@ function client(socket) {
 	this.socket = socket;
   this.nick = "";
   this.channel = "";
+	this.isTyping = false;
 }
 
 function validate(txt) {

@@ -4,6 +4,10 @@
   --primary: #1ABC9C;
   --secondary: #16A085;
   --white: #ecf0f1;
+  --text: #ddd;
+  --shadow: rgba(0,0,0,0.2);
+  --background-trans: rgba(200,200,200,0.1);
+  --input-text: white;
 }
 
 * {
@@ -17,6 +21,7 @@ body {
   background: var(--gray);
   color: var(--white);
   font-family: 'Dosis', sans-serif;
+  overflow-x: hidden;
 }
 
 .container {
@@ -31,7 +36,7 @@ header {
   z-index: 2;
   height: 50px;
   background: var(--dark);
-  border-bottom: 3px solid rgba(0,0,0,0.1);
+  border-bottom: 3px solid var(--shadow);
 }
 
 header a {
@@ -60,6 +65,7 @@ header .u-info .icon {
     position: absolute;
     top: 0px;
     right: 0px;
+    font-family: 'Dosis', sans-serif;
 }
 
 header .logo {
@@ -73,14 +79,14 @@ header .logo {
 }
 
 .sidebar {
-  background: rgba(0,0,0,0.1);
+  background: var(--dark);
   height: calc(100vh - 50px);
   position: fixed;
   right: 0px;
   top: 50px;
   width: 240px;
   z-index: 1;
-  border-left: 3px solid rgba(0,0,0,0.1);
+  border-left: 3px solid var(--shadow);
   display: none;
 }
 
@@ -95,23 +101,29 @@ header .logo {
 .sidebar p {
   margin: 20px 0px 10px 10px;
   font-weight: bold;
-  color: #bbb;
+  color: var(--text);
 }
 
 .sidebar li {
   padding: 10px 15px;
-  background: rgba(200,200,200,0.1);
-  color: #bbb;
+  background: var(--background-trans);
+  color: var(--text);
   display: inline-flex;
   width: 100%;
   line-height: 30px;
 }
 
-.sidebar li:first-of-type {
+.fa-pencil {
+  line-height: 30px;
+  font-size: 15px;
+  padding-left: 10px;
+}
+
+.sidebar .list li:first-of-type {
   border-radius: 5px 5px 0px 0px;
 }
 
-.sidebar li:last-of-type {
+.sidebar .list li:last-of-type {
   border-radius: 0px 0px 5px 5px;
 }
 
@@ -119,6 +131,122 @@ header .logo {
   width: 30px;
   height: 30px;
   margin-right: 10px;
+  font-family: 'Dosis', sans-serif;
+}
+
+.sidebar .settings {
+  position: absolute;
+  bottom: 20px;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  right: 50%;
+  margin-right: -17px;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--primary);
+  text-shadow: 0px 0px 3px var(--dark);
+}
+
+.sidebar .settings:hover {
+  cursor: pointer;
+}
+
+.sidebar .settings.clicked {
+  transform: rotate(90deg);
+}
+
+.sidebar ul.colors{
+  display: inline-block;
+  width: calc(100% - 20px);
+  padding: 0px;
+  margin: 0px;
+  background: transparent;
+  position: absolute;
+  bottom: 60px;
+  text-align: center;
+}
+
+.sidebar ul.colors > li {
+  animation: hideDown 0.3s forwards;
+  transform: translateY(100%);
+}
+
+.sidebar ul.colors.show > li {
+  animation: slideUp 0.2s forwards;
+}
+
+.sidebar ul.colors.show > li:nth-of-type(n+5) {
+  animation-duration: 0.4s;
+}
+
+.sidebar ul.colors.show > li:nth-of-type(3n+1) {
+  animation-duration: 0.5s;
+}
+
+.sidebar ul.colors.show > li:nth-of-type(3n+5) {
+  animation-duration: 0.6s;
+}
+
+ul.colors li {
+  display: inline-block;
+  width: 30px;
+  height: 34px;
+  background: #34495E;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  margin: 5px;
+  box-shadow: 0px 0px 3px var(--shadow);
+  border: 2px solid rgba(255,255,255,0.6);
+}
+
+.colors li:after {
+  position: absolute;
+  content: '';
+  height: 30px;
+  width: 30px;
+  top: 0px;
+}
+
+.colors li:hover {
+  cursor: pointer;
+}
+
+ul.colors li.light:after {
+  background: white;
+}
+
+ul.colors li.dark:after {
+  background: #333;
+}
+
+ul.colors li.material:after {
+  background: #1ABC9C;
+}
+
+ul.colors li.blue {
+  background: #5c9dff;
+}
+
+ul.colors li.purple {
+  background: #975dfa;
+}
+
+ul.colors li.teal {
+  background: #20FC8F;
+}
+
+ul.colors li.orange {
+  background: #F18805;
+}
+
+ul.colors li.red {
+  background: #e74c3c;
+}
+
+ul.colors li.black {
+  background: #272822;
 }
 
 .chat-box {
@@ -148,8 +276,8 @@ header .logo {
 }
 
 input, .chat-box textarea {
-  background: rgba(250,250,250,0.1);
-  color: var(--white);
+  background: var(--background-trans);
+  color: var(--input-text);
   border: none;
   resize: none;
   height: 50px;
@@ -188,7 +316,7 @@ input, .chat-box textarea {
 .message .user {
   line-height: 40px;
   font-weight: bold;
-  color: #bbb;
+  color: var(--input-text);
   margin-right: 0px;
   margin-left: auto;
   margin-top: 0px;
@@ -203,6 +331,7 @@ input, .chat-box textarea {
   background: var(--primary);
   margin-top: 0px;
   margin-bottom: auto;
+  font-family: 'Dosis', sans-serif;
 }
 
 .message .text {
@@ -228,7 +357,8 @@ input, .chat-box textarea {
   width: 0px;
   height: 0px;
   border-left: 10px solid var(--gray);
-  border-top: 10px solid rgba(200,200,200, 0.1);
+  border-top: 10px solid transparent;
+  transition: all 0.3s ease;
 }
 
 .message .text-box {
@@ -239,10 +369,10 @@ input, .chat-box textarea {
   font-style: italic;
   font-weight: bold;
   font-size: 16px;
-  margin: 20px 10px;
-  color: var(--white);
+  margin: 5px auto;
+  color: var(--input-text);
   text-shadow: 0px 0px 1px var(--dark);
-  padding-left: 80px;
+  text-align: center;
   animation: slideUp 0.3s forwards;
 }
 
@@ -262,7 +392,7 @@ input, .chat-box textarea {
 
 .login h3 {
   margin-bottom: 20px;
-  color: #bbb;
+  color: var(--text);
 }
 
 .login input{
@@ -296,7 +426,7 @@ input, .chat-box textarea {
   opacity: 0;
 }
 
-textarea:focus, input:focus {
+textarea:focus, input:focus, *:focus {
   border: none;
   outline: none;
 }
@@ -306,7 +436,7 @@ input:hover {
 }
 
 .icon {
-  background: var(--secondary);
+  background: var(--primary);
   border-radius: 50%;
   text-align: center;
   line-height: 30px;
@@ -314,10 +444,11 @@ input:hover {
   font-weight: bold;
   font-family: monospace;
   text-transform: uppercase;
+  font-family: 'Dosis', sans-serif;
 }
 
 .shadow {
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 10px var(--shadow);
 }
 
 .content {
@@ -359,7 +490,7 @@ input:hover {
 }
 
 .channel-box {
-  background: rgba(200,200,200,0.1);
+  background: var(--background-trans);
   width: 300px;
   border-radius: 7px;
 }
@@ -422,6 +553,7 @@ input:hover {
   border-radius: 3px;
   margin-top: -6px;
   margin-left: -50%;
+  transition: all 0.3s ease;
 }
 
 .bar {
@@ -438,6 +570,40 @@ input:hover {
 
 .bar::after {
   margin-top: 6px;
+}
+
+#bar:hover > .bar::before {
+  margin-top: -8px;
+}
+
+#bar:hover > .bar::after {
+  margin-top: 8px;
+}
+
+#bar.clicked:hover > .bar::before {
+  margin-top: -6px;
+}
+
+#bar.clicked:hover > .bar::after {
+  margin-top: 6px;
+}
+
+#bar.clicked > .bar::after {
+  transform-origin: left;
+  transform: translateY(1px) rotate(-45deg);
+}
+
+#bar.clicked > .bar::before {
+  transform-origin: left;
+  transform: translateY(-1px) rotate(45deg);
+}
+
+#bar.clicked > .bar {
+  width: 0px;
+}
+
+#bar.clicked:hover > .bar {
+  transform: scale(1.1);
 }
 
 #bar, #cross {
@@ -518,11 +684,22 @@ input:hover {
   }
 }
 
+@keyframes hideDown {
+  0% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+
 @media (max-width: 720px) {
   .sidebar {
     right: -100%;
     background: var(--dark);
-    opacity: 0.8;
   }
   .chat-box {
     width: 100%;
@@ -559,14 +736,6 @@ input:hover {
     line-height: 30px;
     width: 60px;
     height: 50px;
-  }
-
-  .slideL {
-    right: 20px;
-  }
-
-  .slideL .bar {
-    opacity: 0;
   }
 
   .showSide {
@@ -606,7 +775,7 @@ input:hover {
 
   .chat-box .text {
     padding-top: 34px;
-    color: #ddd;
+    color: var(--text);
     width: 100%;
   }
 
